@@ -36,15 +36,22 @@ class Ensemble:
         except ConnectionRefusedError:
             logging.error("Unble to connect.")
 
+
+    def enable(self):
+        "Enable the axis"
+        self.write_read('ENABLE X')
+        self.write_read('ENABLE Y')
+        self.write_read('ENABLE Z')
+        logging.info('Enabled axis')
+
+
     def write_read(self, command):
         """This method writes a command and returns the response,
         checking for an error code.
-
         Parameters
         ----------
         command : str
             The command to be sent, e.g. HOME X
-
         Returns
         ----------
         response : str
@@ -69,7 +76,6 @@ class Ensemble:
 
     def move(self, x_pos, y_pos, z_pos):
         """Move to an X Y Z
-
         Parameters
         ----------
         x_pos : double
@@ -82,7 +88,6 @@ class Ensemble:
 
     def get_positions(self):
         """Method to get the latest positions.
-
         Returns
         ----------
         positions : dict
